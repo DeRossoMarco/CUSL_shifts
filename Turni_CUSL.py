@@ -24,14 +24,14 @@ CSV_FILE_PATH = "disponibilita.csv"
 def show_parameters_dialog():
     dialog = tk.Tk()
     dialog.title("Impostazioni Turni")
-    
+        
     # Add cancelled flag
     dialog.cancelled = True  # Default to True, set to False only on successful validation
     
     # Configure window grid
     dialog.grid_rowconfigure(0, weight=1)
     dialog.grid_columnconfigure(0, weight=1)
-    
+
     # Set minimum window size
     dialog.minsize(400, 300)
     
@@ -265,6 +265,9 @@ def load_availability_from_csv(file_name, weekly_shifts):
 def create_gui(shifts, weekly_shifts, availability):
     root = tk.Tk()
     root.title("Turni Settimanali")
+    
+    # Set minimum window size
+    root.minsize(800, 600)
     
     # Configure window size and position
     window_width = 1400
@@ -656,6 +659,9 @@ class LoadingScreen:
         self.window = tk.Tk()
         self.window.title("Turni Settimanali")
         self.window.config(cursor="arrow")
+        
+        # Set minimum window size
+        self.window.minsize(300, 200)
         
         # Add cancelled flag and after_id
         self.cancelled = False
