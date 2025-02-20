@@ -270,8 +270,8 @@ def create_gui(shifts, weekly_shifts, availability):
     root.minsize(800, 600)
     
     # Configure window size and position
-    window_width = 1400
-    window_height = 900
+    window_width = 1000  # Adjusted width
+    window_height = 700
     screen_width = root.winfo_screenwidth()
     screen_height = root.winfo_screenheight()
     x = (screen_width - window_width) // 2
@@ -288,7 +288,7 @@ def create_gui(shifts, weekly_shifts, availability):
     
     # Configure container grid
     container.grid_rowconfigure(0, weight=1)
-    container.grid_columnconfigure(0, weight=4)  # Schedule area gets more space
+    container.grid_columnconfigure(0, weight=4)  # Adjusted weight
     container.grid_columnconfigure(1, weight=1)  # Right panel gets less space
     
     # Schedule frame (left side)
@@ -366,8 +366,8 @@ def create_gui(shifts, weekly_shifts, availability):
     indicators = {}  # Store references to indicators for updating colors
 
     def create_indicator(parent):
-        canvas = tk.Canvas(parent, width=200, height=12, highlightthickness=0)
-        rectangle = canvas.create_rectangle(0, 0, 200, 12, fill='#ffff33')
+        canvas = tk.Canvas(parent, width=120, height=12, highlightthickness=0)  # Adjusted width
+        rectangle = canvas.create_rectangle(0, 0, 120, 12, fill='#ffff33')  # Adjusted width
         return canvas, rectangle
 
     def validate_slot(slot):
@@ -444,6 +444,7 @@ def create_gui(shifts, weekly_shifts, availability):
             # Create a frame for checkboxes
             checkbox_frame = tk.Frame(cell_frame)
             checkbox_frame.grid(row=1, column=0, sticky='nsew')
+            checkbox_frame.grid_columnconfigure(0, weight=1)  # Ensure checkboxes expand
 
             # Make checkboxes more compact
             for persona in all_people:
@@ -453,9 +454,11 @@ def create_gui(shifts, weekly_shifts, availability):
                     text=persona, 
                     variable=var,
                     command=lambda p=persona, s=day_slot: on_checkbox_change(p, s),
-                    font=('Helvetica', 8)
+                    font=('Helvetica', 8),
+                    wraplength=100,  # Limit text width for wrapping
+                    justify='left'  # Align wrapped text to the left
                 )
-                check.grid(sticky=tk.W, padx=1, pady=0)
+                check.grid(sticky='ew', padx=0, pady=0)  # Expand checkboxes horizontally
                 checkboxes[(persona, day_slot)] = var
             
             # Initialize indicator color
