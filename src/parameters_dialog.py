@@ -11,6 +11,22 @@ class ParametersDialog:
         # Center the window
         self.center_window()
 
+        self.style = ttk.Style()
+        self.style.configure(
+            "Custom.TButton",
+            font=('Helvetica', 10, 'bold'),
+            padding=(10, 5),
+            background="#4a90e2",
+            foreground="white",
+            borderwidth=2,
+            relief="raised"
+        )
+        self.style.map(
+            "Custom.TButton",
+            background=[("active", "#357ABD"), ("disabled", "#A9A9A9")],
+            foreground=[("active", "white"), ("disabled", "#D3D3D3")]
+        )
+
     def center_window(self):
         window_width = 500
         window_height = 300
@@ -80,7 +96,9 @@ class ParametersDialog:
                 csv_path_var.set(selected)
                 self.config.CSV_FILE_PATH = selected
 
-        ttk.Button(csv_frame, text="Carica CSV", command=select_csv).grid(row=0, column=1, padx=(5, 0))
+        ttk.Button(
+            csv_frame, text="Carica CSV", command=select_csv, style="Custom.TButton"
+        ).grid(row=0, column=1, padx=(5, 0))
 
         def open_availability_only():
             if not self.validate_parameters(min_var, max_var):
@@ -109,16 +127,14 @@ class ParametersDialog:
             btn_frame,
             text="Apri Disponibilità",
             command=open_availability_only,
-            style='Accent.TButton',
-            padding=(20, 10)
+            style='Custom.TButton'
         ).grid(row=0, column=0, padx=5)
 
         ttk.Button(
             btn_frame,
             text="Genera Turni",
             command=generate_shifts,
-            style='Accent.TButton',
-            padding=(20, 10)
+            style='Custom.TButton'
         ).grid(row=0, column=1, padx=5)
 
         self.dialog.protocol("WM_DELETE_WINDOW", self.dialog.destroy)

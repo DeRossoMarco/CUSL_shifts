@@ -53,9 +53,28 @@ class LoadingScreen:
                                         start=self.arc_start, extent=300,
                                         style=tk.ARC, width=4)
         
+        # Add custom style for cancel button
+        self.style = ttk.Style()
+        self.style.configure(
+            "Custom.TButton",
+            font=('Helvetica', 10, 'bold'),
+            padding=(10, 5),
+            background="#4a90e2",
+            foreground="white",
+            borderwidth=2,
+            relief="raised"
+        )
+        self.style.map(
+            "Custom.TButton",
+            background=[("active", "#357ABD"), ("disabled", "#A9A9A9")],
+            foreground=[("active", "white"), ("disabled", "#D3D3D3")]
+        )
+        
         # Add cancel button
-        self.cancel_button = ttk.Button(self.frame, text="Annulla",
-                                      command=self.cleanup, cursor="arrow")
+        self.cancel_button = ttk.Button(
+            self.frame, text="Annulla",
+            command=self.cleanup, cursor="arrow", style="Custom.TButton"
+        )
         self.cancel_button.grid(row=2, column=0, pady=10)
         
         # Set up close handler

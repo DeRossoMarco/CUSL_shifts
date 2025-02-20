@@ -14,6 +14,21 @@ class ShiftGUI:
         self.reload_func = reload_func
         self.calculate_shifts = calculate_shifts
         self.root = tk.Tk()
+        self.style = ttk.Style()
+        self.style.configure(
+            "Custom.TButton",
+            font=('Helvetica', 10, 'bold'),
+            padding=(10, 5),
+            background="#4a90e2",
+            foreground="white",
+            borderwidth=2,
+            relief="raised"
+        )
+        self.style.map(
+            "Custom.TButton",
+            background=[("active", "#357ABD"), ("disabled", "#A9A9A9")],
+            foreground=[("active", "white"), ("disabled", "#D3D3D3")]
+        )
 
     def show(self):
         self.root.title("Turni Settimanali")
@@ -344,13 +359,13 @@ class ShiftGUI:
 
         recalc_button = ttk.Button(
             button_frame, text="Ricalcola Turni",
-            command=recalculate_shifts, padding=(10, 5)
+            command=recalculate_shifts, style="Custom.TButton"
         )
         recalc_button.grid(row=0, column=0, padx=5)
 
         print_button = ttk.Button(
             button_frame, text="Salva Immagine",
-            command=save_image, padding=(10, 5)
+            command=save_image, style="Custom.TButton"
         )
         print_button.grid(row=0, column=1, padx=5)
 
@@ -360,8 +375,7 @@ class ShiftGUI:
 
         back_button = ttk.Button(
             button_frame, text="Indietro",
-            command=go_back_to_parameters,
-            padding=(10, 5)
+            command=go_back_to_parameters, style="Custom.TButton"
         )
         back_button.grid(row=0, column=2, padx=5)
 
