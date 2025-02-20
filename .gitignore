@@ -7,3 +7,11 @@
 # CSV files execpt structure.csv
 *.csv
 !structure.csv
+
+# Python cache files
+__pycache__
+
+# Generated images
+*.png
+*.jpg
+*.bmp
