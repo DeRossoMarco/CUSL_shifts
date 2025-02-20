@@ -460,11 +460,24 @@ def create_gui(shifts, weekly_shifts, availability):
             
     def recalculate_shifts():
         root.destroy()
-        # Generate new shifts directly instead of going back to main()
-        new_shifts = generate_shifts(dict(availability), weekly_shifts)
-        while len(new_shifts) == 0:
+        # Show loading screen and generate new shifts
+        loading_window = show_loading_screen()
+        
+        def calculate_and_go():
+            if hasattr(loading_window, 'cancelled') and loading_window.cancelled:
+                return
             new_shifts = generate_shifts(dict(availability), weekly_shifts)
-        create_gui(new_shifts, weekly_shifts, availability)
+            while not new_shifts:
+                if hasattr(loading_window, 'cancelled') and loading_window.cancelled:
+                    return
+                new_shifts = generate_shifts(dict(availability), weekly_shifts)
+                loading_window.update()
+            if loading_window.winfo_exists():
+                loading_window.destroy()
+                create_gui(new_shifts, weekly_shifts, availability)
+        
+        loading_window.after(100, calculate_and_go)
+        loading_window.mainloop()
 
     def get_system_font():
         system = platform.system()
@@ -649,6 +662,7 @@ def show_loading_screen():
     def on_cancel():
         loading_window.cancelled = True
         loading_window.destroy()
+        main()
     
     # Configure window grid
     loading_window.grid_rowconfigure(0, weight=1)
