@@ -1,0 +1,9 @@
+# MacOS files
+.DS_Store
+
+# VSCode folder
+.vscode
+
+# CSV files execpt structure.csv
+*.csv
+!structure.csv
