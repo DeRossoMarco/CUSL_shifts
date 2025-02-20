@@ -271,7 +271,7 @@ def create_gui(shifts, weekly_shifts, availability):
     
     # Configure window size and position
     window_width = 1000  # Adjusted width
-    window_height = 700
+    window_height = 800
     screen_width = root.winfo_screenwidth()
     screen_height = root.winfo_screenheight()
     x = (screen_width - window_width) // 2
