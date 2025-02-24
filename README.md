@@ -1,6 +1,6 @@
-# CUSL Shifts - Weekly Shift Generator
+# Shifts - Weekly Shift Generator
 
-A Python application for generating and managing weekly shifts for CUSL.
+A Python application for generating and managing weekly shifts.
 
 ## Features
 
@@ -27,21 +27,22 @@ A Python application for generating and managing weekly shifts for CUSL.
 ## Usage
 
 1. Prepare a CSV file with availabilities in the required format:
+
    - First column: "Name"
    - Following columns: see structure.csv
    - Use "SI" to indicate availability
-
 2. Launch the application:
-   ```bash
-   python3 Turni_CUSL.py
-   ```
 
+   ```bash
+   python3 main.py
+   ```
 3. In the configuration window:
+
    - Set minimum and maximum people per shift
    - Select the CSV availability file
    - Choose to view availabilities only or generate shifts
-
 4. In the main window:
+
    - Edit shifts using checkboxes
    - View unassigned people
    - Regenerate shifts with "Ricalcola" button
@@ -50,6 +51,7 @@ A Python application for generating and managing weekly shifts for CUSL.
 ## CSV Format
 
 Example CSV structure:
+
 ```csv
 Nome,lunedi_m,lunedi_pr,lunedi_po,martedi_m,...
 Mario,SI,,SI,,...
