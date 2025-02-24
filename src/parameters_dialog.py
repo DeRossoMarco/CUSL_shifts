@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
+from .shift_utils import load_availability
 
 class ParametersDialog:
     def __init__(self, config):
@@ -103,6 +104,8 @@ class ParametersDialog:
         def open_availability_only():
             if not self.validate_parameters(min_var, max_var):
                 return
+            if not self.validate_csv():
+                return
             self.update_config(min_var, max_var, csv_path_var)
             self.dialog.cancelled = False  # Not cancelled, but will open GUI directly
             self.dialog.availability_only = True  # Flag to indicate direct GUI opening
@@ -110,6 +113,8 @@ class ParametersDialog:
 
         def generate_shifts():
             if not self.validate_parameters(min_var, max_var):
+                return
+            if not self.validate_csv():
                 return
             self.update_config(min_var, max_var, csv_path_var)
             self.dialog.cancelled = False
@@ -162,3 +167,19 @@ class ParametersDialog:
         self.config.MIN_PEOPLE_PER_SHIFT = min_var.get()
         self.config.MAX_PEOPLE_PER_SHIFT = max_var.get()
         self.config.CSV_FILE_PATH = csv_path_var.get()
+
+    def validate_csv(self):
+        try:
+            availability = load_availability(self.config, self.config.CSV_FILE_PATH)
+        except Exception as e:
+            messagebox.showerror("Errore", f"Errore nel leggere il CSV:\n{e}")
+            return False
+        for shift in self.config.weekly_shifts:
+            count = sum(1 for person in availability if shift in availability[person])
+            if count < self.config.MIN_PEOPLE_PER_SHIFT:
+                messagebox.showerror(
+                    "Errore",
+                    f"Non ci sono abbastanza persone per il turno: {shift}"
+                )
+                return False
+        return True
