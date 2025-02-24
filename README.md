@@ -19,7 +19,7 @@ A Python application for generating and managing weekly shifts.
 ## Installation
 
 1. Clone the repository or download the files
-2. Install dependencies:
+2. Install dependencies from inside the folder:
    ```bash
    python3 -m pip install -r requirements.txt
    ```
@@ -31,7 +31,7 @@ A Python application for generating and managing weekly shifts.
    - First column: "Name"
    - Following columns: see structure.csv
    - Use "SI" to indicate availability
-2. Launch the application:
+2. Launch the application from inside the folder:
 
    ```bash
    python3 main.py
