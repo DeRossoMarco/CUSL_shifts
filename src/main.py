@@ -1,8 +1,8 @@
-from src.app_config import AppConfig
-from src.shift_utils import load_availability, generate_shifts
-from src.loading_screen import LoadingScreen
-from src.parameters_dialog import ParametersDialog
-from src.shift_gui import ShiftGUI
+from app_config import AppConfig
+from shift_utils import load_availability, generate_shifts
+from loading_screen import LoadingScreen
+from parameters_dialog import ParametersDialog
+from shift_gui import ShiftGUI
 
 class CUSLShiftApp:
     def __init__(self):
