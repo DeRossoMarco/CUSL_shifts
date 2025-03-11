@@ -8,4 +8,4 @@ class AppConfig:
     ]
     MIN_PEOPLE_PER_SHIFT = 2
     MAX_PEOPLE_PER_SHIFT = 3
-    CSV_FILE_PATH = "disponibilita.csv"
+    CSV_FILE_PATH = ""
